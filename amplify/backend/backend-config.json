@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "timerapp346f623f": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
