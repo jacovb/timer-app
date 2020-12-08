@@ -3,6 +3,13 @@ import logo from "./logo.svg";
 import "./App.css";
 import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 
+import { listProjects } from "./graphql/queries";
+import {
+  createProject,
+  updateProject,
+  deleteProject,
+} from "./graphql/mutations";
+
 function App() {
   return (
     <div className="App">
