@@ -16,3 +16,6 @@ function App() {
 }
 
 export default withAuthenticator(App);
+
+// GraphQL endpoint: https://4y7lylu7bfagzcysd7p3r5zcfq.appsync-api.eu-west-2.amazonaws.com/graphql
+// GraphQL API KEY: da2-hw62ndyeeffjleziq5bxtfo6ji
