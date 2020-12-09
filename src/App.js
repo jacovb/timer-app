@@ -1,23 +1,98 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+import { API } from "aws-amplify";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 import { listProjects } from "./graphql/queries";
 import {
-  createProject,
-  updateProject,
-  deleteProject,
+  createProject as createProjectMutation,
+  //  updateProject as updateProjectMutation,
+  deleteProject as deleteProjectMutation,
 } from "./graphql/mutations";
 
+import Navbar from "./components/Navbar";
+import NewProjects from "./components/NewProjects";
+import Timesheets from "./components/Timesheets";
+import Reports from "./components/Reports";
+
+const startForm = { projectNo: "", name: "", allowedHours: "" };
+
 function App() {
+  const [projects, setProjects] = useState([]);
+  const [formData, setFormData] = useState(startForm);
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  async function fetchProjects() {
+    const apiData = await API.graphql({ query: listProjects });
+    setProjects(apiData.data.listProjects.items);
+  }
+
+  async function createProject() {
+    if (!formData.projectNo || !formData.name) return;
+    await API.graphql({
+      query: createProjectMutation,
+      variables: { input: formData },
+    });
+    setProjects([...projects, formData]);
+    setFormData(startForm);
+  }
+
+  async function deleteProject({ id }) {
+    const newProjectsArray = projects.filter((proj) => proj.id !== id);
+    setProjects(newProjectsArray);
+    await API.graphql({
+      query: deleteProjectMutation,
+      variables: { input: { id } },
+    });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello from V2</h1>
-      </header>
-      <AmplifySignOut />
+      <h1>Timesheet-App</h1>
+      <Router>
+        <Navbar />
+        <div id="mainContainer">
+          <Switch>
+            <Route exact path="/">
+              <div style={{ marginBottom: 30 }}>
+                {projects.map((project) => (
+                  <div key={project.id || project.name}>
+                    <p>
+                      {project.projectNo} - {project.name} -{" "}
+                      {project.allowedHours}
+                    </p>
+                    <button onClick={() => deleteProject(project)}>
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </Route>
+
+            <Route exact path="/newProjects">
+              <NewProjects
+                formData={formData}
+                setFormData={setFormData}
+                projects={projects}
+                setProjects={setProjects}
+                createProject={createProject}
+              />
+            </Route>
+
+            <Route exact path="/timesheets">
+              <Timesheets />
+            </Route>
+
+            <Route exact path="/reports">
+              <Reports />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
