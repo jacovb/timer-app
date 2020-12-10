@@ -33,12 +33,16 @@ function App() {
 
   async function createProject() {
     if (!formData.projectNo || !formData.name) return;
-    await API.graphql({
-      query: createProjectMutation,
-      variables: { input: formData },
-    });
-    setProjects([...projects, formData]);
-    setFormData(startForm);
+    if (projects.some((item) => item.projectNo === formData.projectNo)) {
+      alert("Project Number Already Exists");
+    } else {
+      await API.graphql({
+        query: createProjectMutation,
+        variables: { input: formData },
+      });
+      setProjects([...projects, formData]);
+      setFormData(startForm);
+    }
   }
 
   async function deleteProject({ id }) {
@@ -59,17 +63,19 @@ function App() {
           <Switch>
             <Route exact path="/">
               <div style={{ marginBottom: 30 }}>
-                {projects.map((project) => (
-                  <div key={project.id || project.name}>
-                    <p>
-                      {project.projectNo} - {project.name} -{" "}
-                      {project.allowedHours}
-                    </p>
-                    <button onClick={() => deleteProject(project)}>
-                      Delete
-                    </button>
-                  </div>
-                ))}
+                {projects
+                  .sort((a, b) => a.projectNo - b.projectNo)
+                  .map((project) => (
+                    <div key={project.id || project.name}>
+                      <p>
+                        {project.projectNo} - {project.name} -{" "}
+                        {project.allowedHours}
+                      </p>
+                      <button onClick={() => deleteProject(project)}>
+                        Delete
+                      </button>
+                    </div>
+                  ))}
               </div>
             </Route>
 
