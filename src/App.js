@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
+import Auth from "@aws-amplify/auth";
 import { API } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
@@ -60,6 +61,7 @@ function App() {
       <Router>
         <Navbar />
         <div id="mainContainer">
+          {console.log(Auth.user.username)}
           <Switch>
             <Route exact path="/">
               <div style={{ marginBottom: 30 }}>
