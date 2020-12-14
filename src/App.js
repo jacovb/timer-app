@@ -61,7 +61,7 @@ function App() {
       <Router>
         <Navbar />
         <div id="mainContainer">
-          {/* {console.log(Auth.user.username)} */}
+          {console.log(Auth.user.username)}
           <Switch>
             <Route exact path="/">
               <div style={{ marginBottom: 30 }}>
