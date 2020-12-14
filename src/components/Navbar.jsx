@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { AmplifySignOut } from "@aws-amplify/ui-react";
+import Auth from "@aws-amplify/auth";
 
 export default function Navbar() {
     return (
@@ -18,6 +19,9 @@ export default function Navbar() {
                 Reports
             </Link>
             <AmplifySignOut />
+            <Link to={`/${Auth.user.username}`} id="navButton">
+                {Auth.user.username}
+            </Link>
         </div>
     )
 }
