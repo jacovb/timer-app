@@ -3,4 +3,20 @@ type Project @model {
   projectNo: Int!
   name: String!
   allowedHours: Int!
+  status: String!
+}
+
+type User @model {
+  id: ID!
+  username: String!
+  title: String!
+  log: [Tasks]
+}
+
+type Tasks {
+  id: ID!
+  projectNo: Int!
+  name: String!
+  description: String!
+  taskTime: Int!
 }

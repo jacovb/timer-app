@@ -8,6 +8,7 @@ export const onCreateProject = /* GraphQL */ `
       projectNo
       name
       allowedHours
+      status
       createdAt
       updatedAt
     }
@@ -20,6 +21,7 @@ export const onUpdateProject = /* GraphQL */ `
       projectNo
       name
       allowedHours
+      status
       createdAt
       updatedAt
     }
@@ -32,6 +34,61 @@ export const onDeleteProject = /* GraphQL */ `
       projectNo
       name
       allowedHours
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      username
+      title
+      log {
+        id
+        projectNo
+        name
+        description
+        taskTime
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      username
+      title
+      log {
+        id
+        projectNo
+        name
+        description
+        taskTime
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      username
+      title
+      log {
+        id
+        projectNo
+        name
+        description
+        taskTime
+      }
       createdAt
       updatedAt
     }

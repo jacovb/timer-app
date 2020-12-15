@@ -8,6 +8,7 @@ export const getProject = /* GraphQL */ `
       projectNo
       name
       allowedHours
+      status
       createdAt
       updatedAt
     }
@@ -25,6 +26,50 @@ export const listProjects = /* GraphQL */ `
         projectNo
         name
         allowedHours
+        status
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      username
+      title
+      log {
+        id
+        projectNo
+        name
+        description
+        taskTime
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        title
+        log {
+          id
+          projectNo
+          name
+          description
+          taskTime
+        }
         createdAt
         updatedAt
       }
