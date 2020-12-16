@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateProject = /* GraphQL */ `
-  subscription OnCreateProject {
-    onCreateProject {
+  subscription OnCreateProject($owner: String!) {
+    onCreateProject(owner: $owner) {
       id
       projectNo
       name
@@ -11,12 +11,13 @@ export const onCreateProject = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateProject = /* GraphQL */ `
-  subscription OnUpdateProject {
-    onUpdateProject {
+  subscription OnUpdateProject($owner: String!) {
+    onUpdateProject(owner: $owner) {
       id
       projectNo
       name
@@ -24,12 +25,13 @@ export const onUpdateProject = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteProject = /* GraphQL */ `
-  subscription OnDeleteProject {
-    onDeleteProject {
+  subscription OnDeleteProject($owner: String!) {
+    onDeleteProject(owner: $owner) {
       id
       projectNo
       name
@@ -37,12 +39,13 @@ export const onDeleteProject = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+  subscription OnCreateUser($owner: String!) {
+    onCreateUser(owner: $owner) {
       id
       username
       title
@@ -55,12 +58,13 @@ export const onCreateUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+  subscription OnUpdateUser($owner: String!) {
+    onUpdateUser(owner: $owner) {
       id
       username
       title
@@ -73,12 +77,13 @@ export const onUpdateUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+  subscription OnDeleteUser($owner: String!) {
+    onDeleteUser(owner: $owner) {
       id
       username
       title
@@ -91,6 +96,7 @@ export const onDeleteUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;

@@ -8,8 +8,10 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { listProjects } from "./graphql/queries";
 import {
   createProject as createProjectMutation,
-  //  updateProject as updateProjectMutation,
   deleteProject as deleteProjectMutation,
+  // createUser as createUserMutation,
+  // //updateUser as updateUserMutation,
+  // deleteUser as deleteUserMutation,
 } from "./graphql/mutations";
 
 import Navbar from "./components/Navbar";
@@ -18,13 +20,22 @@ import Timesheets from "./components/Timesheets";
 import Reports from "./components/Reports";
 
 const startForm = { projectNo: "", name: "", allowedHours: "" };
+// const startLogForm = {
+//   username: "",
+//   projectNo: "",
+//   description: "",
+//   taskTime: "",
+// };
 
 function App() {
   const [projects, setProjects] = useState([]);
   const [formData, setFormData] = useState(startForm);
+  // const [user, setUser] = useState([]);
+  // const [logData, setLogData] = useState(startLogForm);
 
   useEffect(() => {
     fetchProjects();
+    // fetchUsers();
   }, []);
 
   async function fetchProjects() {
@@ -55,13 +66,37 @@ function App() {
     });
   }
 
+  // async function fetchUsers() {
+  //   const apiData = await API.graphql({ query: listUsers });
+  //   setUser(apiData.data.listUsers.items);
+  // }
+
+  // async function createEntry() {
+  //   if (!logData.projectNo || !logData.taskTime) return;
+  //   await API.graphql({
+  //     query: createUserMutation,
+  //     variables: { input: logData },
+  //   });
+  //   setUser([...user, logData]);
+  //   setLogData(startLogForm);
+  // }
+
+  // async function deleteEntry({ id }) {
+  //   const newEntryArray = user.filter((item) => item.id !== id);
+  //   setUser(newEntryArray);
+  //   await API.graphql({
+  //     query: deleteUserMutation,
+  //     variables: { input: { id } },
+  //   });
+  // }
+
   return (
     <div className="App">
       <h1>Timesheet-App</h1>
       <Router>
         <Navbar />
+        {console.log(Auth.user.username)}
         <div id="mainContainer">
-          {console.log(Auth.user.username)}
           <Switch>
             <Route exact path="/">
               <div style={{ marginBottom: 30 }}>
@@ -79,6 +114,17 @@ function App() {
                     </div>
                   ))}
               </div>
+              {/* <div style={{ marginBottom: 30 }}>
+                {user.map((entry) => (
+                  <div key={entry.id || entry.name}>
+                    <p>
+                      {entry.username}: {entry.log.projectNo} - {entry.log.name}{" "}
+                      - {entry.log.taskTime}
+                    </p>
+                    <button onClick={() => deleteEntry(entry)}>Delete</button>
+                  </div>
+                ))}
+              </div> */}
             </Route>
 
             <Route exact path="/newProjects">
@@ -92,7 +138,13 @@ function App() {
             </Route>
 
             <Route exact path="/timesheets">
-              <Timesheets />
+              <Timesheets
+              // logData={logData}
+              // setLogData={setLogData}
+              // user={user}
+              // setUser={setUser}
+              // createEntry={createEntry}
+              />
             </Route>
 
             <Route exact path="/reports">

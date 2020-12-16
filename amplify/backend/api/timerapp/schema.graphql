@@ -1,4 +1,4 @@
-type Project @model {
+type Project @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   projectNo: Int!
   name: String!
@@ -6,7 +6,7 @@ type Project @model {
   status: String!
 }
 
-type User @model {
+type User @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   username: String!
   title: String!
