@@ -19,7 +19,7 @@ import NewProjects from "./components/NewProjects";
 import Timesheets from "./components/Timesheets";
 import Reports from "./components/Reports";
 
-const startForm = { projectNo: "", name: "", allowedHours: "" };
+const startForm = { projectNo: "", name: "", allowedHours: "", status: "" };
 // const startLogForm = {
 //   username: "",
 //   projectNo: "",
