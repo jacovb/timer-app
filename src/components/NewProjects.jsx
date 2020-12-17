@@ -54,9 +54,9 @@ export default function NewProjects({formData, setFormData, projects, setProject
                 id="status"
                 name="status"
                 onChange={handleAddData}>
-                    <option value={formData.status}>Quote</option>
-                    <option value={formData.status}>Current</option>
-                    <option value={formData.status}>Complete</option>   
+                    <option value="Quote">Quote</option>
+                    <option value="Current">Current</option>
+                    <option value="Complete">Complete</option>   
             </select>
             <br/>
             <button onClick={createProject}>Add New Project</button>
