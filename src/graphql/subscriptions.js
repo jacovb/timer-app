@@ -2,12 +2,13 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateProject = /* GraphQL */ `
-  subscription OnCreateProject($owner: String!) {
+  subscription OnCreateProject($owner: String) {
     onCreateProject(owner: $owner) {
       id
       projectNo
       name
       allowedHours
+      usedHours
       status
       createdAt
       updatedAt
@@ -16,12 +17,13 @@ export const onCreateProject = /* GraphQL */ `
   }
 `;
 export const onUpdateProject = /* GraphQL */ `
-  subscription OnUpdateProject($owner: String!) {
+  subscription OnUpdateProject($owner: String) {
     onUpdateProject(owner: $owner) {
       id
       projectNo
       name
       allowedHours
+      usedHours
       status
       createdAt
       updatedAt
@@ -30,12 +32,13 @@ export const onUpdateProject = /* GraphQL */ `
   }
 `;
 export const onDeleteProject = /* GraphQL */ `
-  subscription OnDeleteProject($owner: String!) {
+  subscription OnDeleteProject($owner: String) {
     onDeleteProject(owner: $owner) {
       id
       projectNo
       name
       allowedHours
+      usedHours
       status
       createdAt
       updatedAt
@@ -43,57 +46,42 @@ export const onDeleteProject = /* GraphQL */ `
     }
   }
 `;
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String!) {
-    onCreateUser(owner: $owner) {
+export const onCreateEntry = /* GraphQL */ `
+  subscription OnCreateEntry($owner: String) {
+    onCreateEntry(owner: $owner) {
       id
-      username
-      title
-      log {
-        id
-        projectNo
-        name
-        description
-        taskTime
-      }
+      projectNo
+      projectName
+      description
+      entryTime
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String!) {
-    onUpdateUser(owner: $owner) {
+export const onUpdateEntry = /* GraphQL */ `
+  subscription OnUpdateEntry($owner: String) {
+    onUpdateEntry(owner: $owner) {
       id
-      username
-      title
-      log {
-        id
-        projectNo
-        name
-        description
-        taskTime
-      }
+      projectNo
+      projectName
+      description
+      entryTime
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String!) {
-    onDeleteUser(owner: $owner) {
+export const onDeleteEntry = /* GraphQL */ `
+  subscription OnDeleteEntry($owner: String) {
+    onDeleteEntry(owner: $owner) {
       id
-      username
-      title
-      log {
-        id
-        projectNo
-        name
-        description
-        taskTime
-      }
+      projectNo
+      projectName
+      description
+      entryTime
       createdAt
       updatedAt
       owner

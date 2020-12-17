@@ -11,6 +11,7 @@ export const createProject = /* GraphQL */ `
       projectNo
       name
       allowedHours
+      usedHours
       status
       createdAt
       updatedAt
@@ -28,6 +29,7 @@ export const updateProject = /* GraphQL */ `
       projectNo
       name
       allowedHours
+      usedHours
       status
       createdAt
       updatedAt
@@ -45,6 +47,7 @@ export const deleteProject = /* GraphQL */ `
       projectNo
       name
       allowedHours
+      usedHours
       status
       createdAt
       updatedAt
@@ -52,66 +55,51 @@ export const deleteProject = /* GraphQL */ `
     }
   }
 `;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
+export const createEntry = /* GraphQL */ `
+  mutation CreateEntry(
+    $input: CreateEntryInput!
+    $condition: ModelEntryConditionInput
   ) {
-    createUser(input: $input, condition: $condition) {
+    createEntry(input: $input, condition: $condition) {
       id
-      username
-      title
-      log {
-        id
-        projectNo
-        name
-        description
-        taskTime
-      }
+      projectNo
+      projectName
+      description
+      entryTime
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
+export const updateEntry = /* GraphQL */ `
+  mutation UpdateEntry(
+    $input: UpdateEntryInput!
+    $condition: ModelEntryConditionInput
   ) {
-    updateUser(input: $input, condition: $condition) {
+    updateEntry(input: $input, condition: $condition) {
       id
-      username
-      title
-      log {
-        id
-        projectNo
-        name
-        description
-        taskTime
-      }
+      projectNo
+      projectName
+      description
+      entryTime
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
+export const deleteEntry = /* GraphQL */ `
+  mutation DeleteEntry(
+    $input: DeleteEntryInput!
+    $condition: ModelEntryConditionInput
   ) {
-    deleteUser(input: $input, condition: $condition) {
+    deleteEntry(input: $input, condition: $condition) {
       id
-      username
-      title
-      log {
-        id
-        projectNo
-        name
-        description
-        taskTime
-      }
+      projectNo
+      projectName
+      description
+      entryTime
       createdAt
       updatedAt
       owner

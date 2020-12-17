@@ -1,22 +1,20 @@
-type Project @model @auth(rules: [{ allow: owner }]) {
+type Project
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: owner }]) {
   id: ID!
   projectNo: Int!
   name: String!
   allowedHours: Int!
+  usedHours: Int
   status: String!
 }
 
-type User @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
-  username: String!
-  title: String!
-  log: [Tasks]
-}
-
-type Tasks {
+type Entry
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: owner }]) {
   id: ID!
   projectNo: Int!
-  name: String!
+  projectName: String!
   description: String!
-  taskTime: Int!
+  entryTime: Int!
 }
