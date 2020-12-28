@@ -19,3 +19,41 @@
   background-color: rgb(202, 202, 202);
   color: black;
 }
+
+.projectsList {
+  margin: auto;
+}
+
+.projectRow {
+  display: grid;
+  grid-template-columns: 100px auto 100px 100px 40px 40px;
+  column-gap: 5px;
+  padding: 5px;
+}
+
+.gridProjectNo {
+  grid-column: 1 / 2;
+}
+
+.gridProjectName {
+  grid-column: 2 / 3;
+  text-align: left;
+}
+
+.gridProjectHours {
+  grid-column: 3 / 4;
+}
+
+.gridProjectStatus {
+  grid-column: 4 / 5;
+}
+
+.gridEditButton {
+  grid-column: 5 / 6;
+  color: navy;
+}
+
+.gridDeleteButton {
+  grid-column: 6 / 7;
+  color: darkred;
+}

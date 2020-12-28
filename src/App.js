@@ -14,6 +14,9 @@ import {
   // deleteUser as deleteUserMutation,
 } from "./graphql/mutations";
 
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import EditIcon from "@material-ui/icons/Edit";
+
 import Navbar from "./components/Navbar";
 import NewProjects from "./components/NewProjects";
 import Timesheets from "./components/Timesheets";
@@ -99,17 +102,25 @@ function App() {
         <div id="mainContainer">
           <Switch>
             <Route exact path="/">
-              <div style={{ marginBottom: 30 }}>
+              <div className="projectsList">
                 {projects
                   .sort((a, b) => a.projectNo - b.projectNo)
                   .map((project, idx) => (
-                    <div key={idx}>
-                      <p>
-                        {project.projectNo} - {project.name} -{" "}
+                    <div className="projectRow" key={idx}>
+                      <div className="gridProjectNo">{project.projectNo}</div>
+                      <div className="gridProjectName">{project.name}</div>
+                      <div className="gridProjectHours">
                         {project.allowedHours}
-                      </p>
-                      <button onClick={() => deleteProject(project)}>
-                        Delete
+                      </div>
+                      <div className="gridProjectStatus">{project.status}</div>
+                      <button className="gridEditButton">
+                        <EditIcon />
+                      </button>
+                      <button
+                        className="gridDeleteButton"
+                        onClick={() => deleteProject(project)}
+                      >
+                        <HighlightOffIcon />
                       </button>
                     </div>
                   ))}
