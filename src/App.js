@@ -102,8 +102,8 @@ function App() {
               <div style={{ marginBottom: 30 }}>
                 {projects
                   .sort((a, b) => a.projectNo - b.projectNo)
-                  .map((project) => (
-                    <div key={project.id || project.name}>
+                  .map((project, idx) => (
+                    <div key={idx}>
                       <p>
                         {project.projectNo} - {project.name} -{" "}
                         {project.allowedHours}
