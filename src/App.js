@@ -63,8 +63,8 @@ function App() {
       query: updateProjectMutation,
       variables: { input: { id } },
     });
-    console.log(projects);
     setFormData(startForm);
+    toggle();
   }
 
   async function deleteProject({ id }) {
