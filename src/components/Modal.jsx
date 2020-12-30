@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default function Modal({ isShowing, hide, formData, setFormData }) {
+export default function Modal({ isShowing, hide, formData, setFormData, updateProject }) {
     
     function handleUpdateData(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value})
@@ -57,7 +57,7 @@ export default function Modal({ isShowing, hide, formData, setFormData }) {
                         <option value="Complete">Complete</option>   
                 </select>
                 <br/>
-                <button onClick={() => console.log(formData)}>Update</button>
+                <button onClick={() => updateProject(formData)}>Update</button>
             </div>
         </div>
     </React.Fragment>, document.body

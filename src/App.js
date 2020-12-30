@@ -29,7 +29,7 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [formData, setFormData] = useState(startForm);
   const { isShowing, toggle } = useModal();
-  //const [index, setIndex] = useState(null);
+  const [index, setIndex] = useState(null);
 
   useEffect(() => {
     fetchProjects();
@@ -55,12 +55,15 @@ function App() {
   }
 
   async function UpdateProject({ id }) {
-    if (!formData.projectNo || !formData.name) return;
+    const newProjectsArray = [...projects];
+    setIndex(projects.findIndex((item) => item.id === id));
+    newProjectsArray[index] = formData;
+    setProjects(newProjectsArray);
     await API.graphql({
       query: updateProjectMutation,
       variables: { input: { id } },
     });
-    setProjects([...projects, formData]);
+    console.log(projects);
     setFormData(startForm);
   }
 
@@ -115,6 +118,7 @@ function App() {
                   hide={toggle}
                   formData={formData}
                   setFormData={setFormData}
+                  updateProject={UpdateProject}
                 />
               </div>
             </Route>
