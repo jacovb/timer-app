@@ -9,6 +9,7 @@ import { listProjects } from "./graphql/queries";
 import {
   createProject as createProjectMutation,
   deleteProject as deleteProjectMutation,
+  updateProject as updateProjectMutation,
 } from "./graphql/mutations";
 
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
@@ -28,7 +29,7 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [formData, setFormData] = useState(startForm);
   const { isShowing, toggle } = useModal();
-  const [index, setIndex] = useState(null);
+  //const [index, setIndex] = useState(null);
 
   useEffect(() => {
     fetchProjects();
@@ -51,6 +52,16 @@ function App() {
       setProjects([...projects, formData]);
       setFormData(startForm);
     }
+  }
+
+  async function UpdateProject({ id }) {
+    if (!formData.projectNo || !formData.name) return;
+    await API.graphql({
+      query: updateProjectMutation,
+      variables: { input: { id } },
+    });
+    setProjects([...projects, formData]);
+    setFormData(startForm);
   }
 
   async function deleteProject({ id }) {
@@ -85,7 +96,7 @@ function App() {
                       <button
                         className="gridEditButton"
                         onClick={() => {
-                          setIndex(idx);
+                          setFormData(project);
                           toggle();
                         }}
                       >
@@ -102,7 +113,8 @@ function App() {
                 <Modal
                   isShowing={isShowing}
                   hide={toggle}
-                  project={projects[index]}
+                  formData={formData}
+                  setFormData={setFormData}
                 />
               </div>
             </Route>
