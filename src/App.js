@@ -9,9 +9,6 @@ import { listProjects } from "./graphql/queries";
 import {
   createProject as createProjectMutation,
   deleteProject as deleteProjectMutation,
-  // createUser as createUserMutation,
-  // //updateUser as updateUserMutation,
-  // deleteUser as deleteUserMutation,
 } from "./graphql/mutations";
 
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
@@ -22,23 +19,19 @@ import NewProjects from "./components/NewProjects";
 import Timesheets from "./components/Timesheets";
 import Reports from "./components/Reports";
 
+import Modal from "./components/Modal";
+import useModal from "./hooks/useModal";
+
 const startForm = { projectNo: "", name: "", allowedHours: "", status: "" };
-// const startLogForm = {
-//   username: "",
-//   projectNo: "",
-//   description: "",
-//   taskTime: "",
-// };
 
 function App() {
   const [projects, setProjects] = useState([]);
   const [formData, setFormData] = useState(startForm);
-  // const [user, setUser] = useState([]);
-  // const [logData, setLogData] = useState(startLogForm);
+  const { isShowing, toggle } = useModal();
+  const [index, setIndex] = useState(null);
 
   useEffect(() => {
     fetchProjects();
-    // fetchUsers();
   }, []);
 
   async function fetchProjects() {
@@ -69,30 +62,6 @@ function App() {
     });
   }
 
-  // async function fetchUsers() {
-  //   const apiData = await API.graphql({ query: listUsers });
-  //   setUser(apiData.data.listUsers.items);
-  // }
-
-  // async function createEntry() {
-  //   if (!logData.projectNo || !logData.taskTime) return;
-  //   await API.graphql({
-  //     query: createUserMutation,
-  //     variables: { input: logData },
-  //   });
-  //   setUser([...user, logData]);
-  //   setLogData(startLogForm);
-  // }
-
-  // async function deleteEntry({ id }) {
-  //   const newEntryArray = user.filter((item) => item.id !== id);
-  //   setUser(newEntryArray);
-  //   await API.graphql({
-  //     query: deleteUserMutation,
-  //     variables: { input: { id } },
-  //   });
-  // }
-
   return (
     <div className="App">
       <h1>Timesheet-App</h1>
@@ -113,7 +82,13 @@ function App() {
                         {project.allowedHours}
                       </div>
                       <div className="gridProjectStatus">{project.status}</div>
-                      <button className="gridEditButton">
+                      <button
+                        className="gridEditButton"
+                        onClick={() => {
+                          setIndex(idx);
+                          toggle();
+                        }}
+                      >
                         <EditIcon />
                       </button>
                       <button
@@ -124,18 +99,12 @@ function App() {
                       </button>
                     </div>
                   ))}
+                <Modal
+                  isShowing={isShowing}
+                  hide={toggle}
+                  project={projects[index]}
+                />
               </div>
-              {/* <div style={{ marginBottom: 30 }}>
-                {user.map((entry) => (
-                  <div key={entry.id || entry.name}>
-                    <p>
-                      {entry.username}: {entry.log.projectNo} - {entry.log.name}{" "}
-                      - {entry.log.taskTime}
-                    </p>
-                    <button onClick={() => deleteEntry(entry)}>Delete</button>
-                  </div>
-                ))}
-              </div> */}
             </Route>
 
             <Route exact path="/newProjects">
