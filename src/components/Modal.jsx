@@ -13,7 +13,7 @@ export default function Modal({ isShowing, hide, formData, setFormData, updatePr
         <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
             <div className="modal">
                 <div className="modal-header">
-                    <h1>Edit Project</h1>  
+                    <h1>Edit Project: {formData.name}</h1>  
                     <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
                         <span aria-hidden="true">&times;</span>
                     </button>   
