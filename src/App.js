@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import Auth from "@aws-amplify/auth";
+//import Auth from "@aws-amplify/auth";
 import { API } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
@@ -57,11 +57,14 @@ function App() {
   async function UpdateProject({ id }) {
     const newProjectsArray = [...projects];
     setIndex(projects.findIndex((item) => item.id === id));
+    delete formData.createdAt;
+    delete formData.updatedAt;
+    delete formData.owner;
     newProjectsArray[index] = formData;
     setProjects(newProjectsArray);
     await API.graphql({
       query: updateProjectMutation,
-      variables: { input: { id } },
+      variables: { input: formData },
     });
     setFormData(startForm);
     toggle();
@@ -81,7 +84,7 @@ function App() {
       <h1>Timesheet-App</h1>
       <Router>
         <Navbar />
-        {console.log(Auth.user.username)}
+        {/* {console.log(Auth.user.username)} */}
         <div id="mainContainer">
           <Switch>
             <Route exact path="/">
