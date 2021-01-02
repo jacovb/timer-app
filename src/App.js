@@ -51,6 +51,7 @@ function App() {
       });
       setProjects([...projects, formData]);
       setFormData(startForm);
+      fetchProjects();
     }
   }
 
@@ -68,6 +69,7 @@ function App() {
     });
     setFormData(startForm);
     toggle();
+    fetchProjects();
   }
 
   async function deleteProject({ id }) {
@@ -77,6 +79,7 @@ function App() {
       query: deleteProjectMutation,
       variables: { input: { id } },
     });
+    fetchProjects();
   }
 
   return (
