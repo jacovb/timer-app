@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default function Modal({ isShowing, hide, formData, setFormData, updateProject }) {
+export default function Modal({ isShowing, hide, formData, updateProject, handleAddData }) {
     
-    function handleUpdateData(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value})
-    }
     
     return isShowing ? ReactDOM.createPortal(
     <React.Fragment>
@@ -24,7 +21,7 @@ export default function Modal({ isShowing, hide, formData, setFormData, updatePr
                     id="projNo"
                     value={formData.projectNo}
                     name="projectNo"
-                    onChange={handleUpdateData}
+                    onChange={handleAddData}
                     required
                 />
                 <br/>
@@ -34,7 +31,7 @@ export default function Modal({ isShowing, hide, formData, setFormData, updatePr
                     id="projName"
                     value={formData.name}
                     name="name"
-                    onChange={handleUpdateData}
+                    onChange={handleAddData}
                 />
                 <br/>
                 <label htmlFor="projHours">Allowed Hours: </label>
@@ -43,7 +40,7 @@ export default function Modal({ isShowing, hide, formData, setFormData, updatePr
                     id="projHours"
                     value={formData.allowedHours}
                     name="allowedHours"
-                    onChange={handleUpdateData}
+                    onChange={handleAddData}
                 />
                 <br/>
                 <label htmlFor="status">Project Status: </label>
@@ -51,7 +48,7 @@ export default function Modal({ isShowing, hide, formData, setFormData, updatePr
                     id="status"
                     name="status"
                     value={formData.status}
-                    onChange={handleUpdateData}>
+                    onChange={handleAddData}>
                         <option value="Quote">Quote</option>
                         <option value="Current">Current</option>
                         <option value="Complete">Complete</option>   

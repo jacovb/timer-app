@@ -1,9 +1,6 @@
 import React from "react";
 
-export default function NewProjects({formData, setFormData, projects, setProjects, createProject}) {
-    function handleAddData(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value})
-    }
+export default function NewProjects({formData, createProject, handleAddData}) {
     
     // function handleAddProjects() { 
     //     if (projects.some((item) => item.projectNo === newProject.projectNo)) {

@@ -82,6 +82,10 @@ function App() {
     fetchProjects();
   }
 
+  function handleAddData(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
   return (
     <div className="App">
       <h1>Timesheet-App</h1>
@@ -123,8 +127,8 @@ function App() {
                   isShowing={isShowing}
                   hide={toggle}
                   formData={formData}
-                  setFormData={setFormData}
                   updateProject={UpdateProject}
+                  handleAddData={handleAddData}
                 />
               </div>
             </Route>
@@ -132,10 +136,8 @@ function App() {
             <Route exact path="/newProjects">
               <NewProjects
                 formData={formData}
-                setFormData={setFormData}
-                projects={projects}
-                setProjects={setProjects}
                 createProject={createProject}
+                handleAddData={handleAddData}
               />
             </Route>
 
