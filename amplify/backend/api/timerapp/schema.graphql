@@ -1,20 +1,25 @@
-type Project
-  @model
-  @auth(rules: [{ allow: public, operations: [read] }, { allow: owner }]) {
+type Project @model {
   id: ID!
   projectNo: Int!
   name: String!
   allowedHours: Int!
   usedHours: Int
   status: String!
+  users: [User] @connection
+  entries: [Entry] @connection(name: "ProjectEntry")
 }
 
-type Entry
-  @model
-  @auth(rules: [{ allow: public, operations: [read] }, { allow: owner }]) {
+type User @model {
   id: ID!
-  projectNo: Int!
-  projectName: String!
+  userName: String
+  projects: [Project] @connection
+  entries: [Entry] @connection(name: "UserEntry")
+}
+
+type Entry @model {
+  id: ID!
+  project: Project @connection(name: "ProjectEntry")
+  user: User @connection(name: "UserEntry")
   description: String!
   entryTime: Int!
 }
