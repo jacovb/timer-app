@@ -2,89 +2,230 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateProject = /* GraphQL */ `
-  subscription OnCreateProject($owner: String) {
-    onCreateProject(owner: $owner) {
+  subscription OnCreateProject {
+    onCreateProject {
       id
       projectNo
       name
       allowedHours
       usedHours
       status
+      users {
+        items {
+          id
+          userName
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entries {
+        items {
+          id
+          description
+          entryTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateProject = /* GraphQL */ `
-  subscription OnUpdateProject($owner: String) {
-    onUpdateProject(owner: $owner) {
+  subscription OnUpdateProject {
+    onUpdateProject {
       id
       projectNo
       name
       allowedHours
       usedHours
       status
+      users {
+        items {
+          id
+          userName
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entries {
+        items {
+          id
+          description
+          entryTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteProject = /* GraphQL */ `
-  subscription OnDeleteProject($owner: String) {
-    onDeleteProject(owner: $owner) {
+  subscription OnDeleteProject {
+    onDeleteProject {
       id
       projectNo
       name
       allowedHours
       usedHours
       status
+      users {
+        items {
+          id
+          userName
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entries {
+        items {
+          id
+          description
+          entryTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      userName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      userName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      userName
+      createdAt
+      updatedAt
     }
   }
 `;
 export const onCreateEntry = /* GraphQL */ `
-  subscription OnCreateEntry($owner: String) {
-    onCreateEntry(owner: $owner) {
+  subscription OnCreateEntry {
+    onCreateEntry {
       id
-      projectNo
-      projectName
+      project {
+        id
+        projectNo
+        name
+        allowedHours
+        usedHours
+        status
+        users {
+          nextToken
+        }
+        entries {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
       description
       entryTime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateEntry = /* GraphQL */ `
-  subscription OnUpdateEntry($owner: String) {
-    onUpdateEntry(owner: $owner) {
+  subscription OnUpdateEntry {
+    onUpdateEntry {
       id
-      projectNo
-      projectName
+      project {
+        id
+        projectNo
+        name
+        allowedHours
+        usedHours
+        status
+        users {
+          nextToken
+        }
+        entries {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
       description
       entryTime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteEntry = /* GraphQL */ `
-  subscription OnDeleteEntry($owner: String) {
-    onDeleteEntry(owner: $owner) {
+  subscription OnDeleteEntry {
+    onDeleteEntry {
       id
-      projectNo
-      projectName
+      project {
+        id
+        projectNo
+        name
+        allowedHours
+        usedHours
+        status
+        users {
+          nextToken
+        }
+        entries {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
       description
       entryTime
       createdAt
       updatedAt
-      owner
     }
   }
 `;

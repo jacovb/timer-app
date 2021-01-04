@@ -10,9 +10,27 @@ export const getProject = /* GraphQL */ `
       allowedHours
       usedHours
       status
+      users {
+        items {
+          id
+          userName
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entries {
+        items {
+          id
+          description
+          entryTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -30,9 +48,41 @@ export const listProjects = /* GraphQL */ `
         allowedHours
         usedHours
         status
+        users {
+          nextToken
+        }
+        entries {
+          nextToken
+        }
         createdAt
         updatedAt
-        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      userName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userName
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -42,13 +92,32 @@ export const getEntry = /* GraphQL */ `
   query GetEntry($id: ID!) {
     getEntry(id: $id) {
       id
-      projectNo
-      projectName
+      project {
+        id
+        projectNo
+        name
+        allowedHours
+        usedHours
+        status
+        users {
+          nextToken
+        }
+        entries {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
       description
       entryTime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -61,13 +130,26 @@ export const listEntrys = /* GraphQL */ `
     listEntrys(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        projectNo
-        projectName
+        project {
+          id
+          projectNo
+          name
+          allowedHours
+          usedHours
+          status
+          createdAt
+          updatedAt
+        }
+        user {
+          id
+          userName
+          createdAt
+          updatedAt
+        }
         description
         entryTime
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

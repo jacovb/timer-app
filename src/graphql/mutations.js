@@ -13,9 +13,27 @@ export const createProject = /* GraphQL */ `
       allowedHours
       usedHours
       status
+      users {
+        items {
+          id
+          userName
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entries {
+        items {
+          id
+          description
+          entryTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -31,9 +49,27 @@ export const updateProject = /* GraphQL */ `
       allowedHours
       usedHours
       status
+      users {
+        items {
+          id
+          userName
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entries {
+        items {
+          id
+          description
+          entryTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -49,9 +85,66 @@ export const deleteProject = /* GraphQL */ `
       allowedHours
       usedHours
       status
+      users {
+        items {
+          id
+          userName
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entries {
+        items {
+          id
+          description
+          entryTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      userName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      userName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      userName
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -62,13 +155,32 @@ export const createEntry = /* GraphQL */ `
   ) {
     createEntry(input: $input, condition: $condition) {
       id
-      projectNo
-      projectName
+      project {
+        id
+        projectNo
+        name
+        allowedHours
+        usedHours
+        status
+        users {
+          nextToken
+        }
+        entries {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
       description
       entryTime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -79,13 +191,32 @@ export const updateEntry = /* GraphQL */ `
   ) {
     updateEntry(input: $input, condition: $condition) {
       id
-      projectNo
-      projectName
+      project {
+        id
+        projectNo
+        name
+        allowedHours
+        usedHours
+        status
+        users {
+          nextToken
+        }
+        entries {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
       description
       entryTime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -96,13 +227,32 @@ export const deleteEntry = /* GraphQL */ `
   ) {
     deleteEntry(input: $input, condition: $condition) {
       id
-      projectNo
-      projectName
+      project {
+        id
+        projectNo
+        name
+        allowedHours
+        usedHours
+        status
+        users {
+          nextToken
+        }
+        entries {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
       description
       entryTime
       createdAt
       updatedAt
-      owner
     }
   }
 `;

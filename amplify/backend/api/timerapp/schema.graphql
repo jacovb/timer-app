@@ -6,20 +6,18 @@ type Project @model {
   usedHours: Int
   status: String!
   users: [User] @connection
-  entries: [Entry] @connection(name: "ProjectEntry")
+  entries: [Entry] @connection
 }
 
 type User @model {
   id: ID!
   userName: String
-  projects: [Project] @connection
-  entries: [Entry] @connection(name: "UserEntry")
 }
 
 type Entry @model {
   id: ID!
-  project: Project @connection(name: "ProjectEntry")
-  user: User @connection(name: "UserEntry")
+  project: Project @connection
+  user: User @connection
   description: String!
   entryTime: Int!
 }
