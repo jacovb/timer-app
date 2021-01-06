@@ -23,7 +23,13 @@ import Reports from "./components/Reports";
 import Modal from "./components/Modal";
 import useModal from "./hooks/useModal";
 
-const startForm = { projectNo: "", name: "", allowedHours: "", status: "" };
+const startForm = {
+  projectNo: "",
+  name: "",
+  allowedHours: "",
+  status: "",
+  users: "",
+};
 
 function App() {
   const [projects, setProjects] = useState([]);
@@ -61,6 +67,9 @@ function App() {
     delete formData.createdAt;
     delete formData.updatedAt;
     delete formData.owner;
+    delete formData.users;
+    delete formData.entries;
+    console.log(formData);
     newProjectsArray[index] = formData;
     setProjects(newProjectsArray);
     await API.graphql({
