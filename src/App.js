@@ -49,7 +49,7 @@ function App() {
   async function createProject() {
     if (!formData.projectNo || !formData.name) return;
     if (projects.some((item) => item.projectNo === formData.projectNo)) {
-      alert("Project Number Already Exists");
+      alert("Project Number Already Exists ");
     } else {
       await API.graphql({
         query: createProjectMutation,
