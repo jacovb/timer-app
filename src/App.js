@@ -64,18 +64,23 @@ function App() {
   async function UpdateProject({ id }) {
     const newProjectsArray = [...projects];
     setIndex(projects.findIndex((item) => item.id === id));
-    delete formData.createdAt;
-    delete formData.updatedAt;
-    delete formData.owner;
-    delete formData.users;
-    delete formData.entries;
-    console.log(formData);
+    // delete formData.createdAt;
+    // delete formData.updatedAt;
     newProjectsArray[index] = formData;
     setProjects(newProjectsArray);
     await API.graphql({
       query: updateProjectMutation,
-      variables: { input: formData },
+      variables: {
+        input: {
+          id: formData.id,
+          name: formData.name,
+          projectNo: formData.projectNo,
+          status: formData.status,
+          allowedHours: formData.allowedHours,
+        },
+      },
     });
+    console.log(formData);
     setFormData(startForm);
     toggle();
     fetchProjects();
