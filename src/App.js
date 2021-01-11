@@ -19,6 +19,7 @@ import Navbar from "./components/Navbar";
 import NewProjects from "./components/NewProjects";
 import Timesheets from "./components/Timesheets";
 import Reports from "./components/Reports";
+import Users from "./components/Users";
 
 import Modal from "./components/Modal";
 import useModal from "./hooks/useModal";
@@ -167,6 +168,10 @@ function App() {
 
             <Route exact path="/reports">
               <Reports />
+            </Route>
+
+            <Route exact path="/users">
+              <Users />
             </Route>
           </Switch>
         </div>

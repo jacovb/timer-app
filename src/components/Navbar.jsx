@@ -22,6 +22,9 @@ export default function Navbar() {
             <Link to={`/${Auth.user.username}`} id="navButton">
                 {Auth.user.username}
             </Link>
+            <Link to="/users" id="navButton">
+                Users
+            </Link>
         </div>
     )
 }
