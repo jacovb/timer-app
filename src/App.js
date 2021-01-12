@@ -5,11 +5,13 @@ import "./App.css";
 import { API } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
-import { listProjects } from "./graphql/queries";
+import { listProjects, listUsers } from "./graphql/queries";
 import {
   createProject as createProjectMutation,
   deleteProject as deleteProjectMutation,
   updateProject as updateProjectMutation,
+  createUser as createUserMutation,
+  deleteUser as deleteUserMutation,
 } from "./graphql/mutations";
 
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
@@ -32,19 +34,31 @@ const startForm = {
   users: "",
 };
 
+const startUserForm = {
+  userName: "",
+};
+
 function App() {
   const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([]);
   const [formData, setFormData] = useState(startForm);
+  const [userData, setUserData] = useState(startUserForm);
   const { isShowing, toggle } = useModal();
   const [index, setIndex] = useState(null);
 
   useEffect(() => {
     fetchProjects();
+    fetchUsers();
   }, []);
 
   async function fetchProjects() {
     const apiData = await API.graphql({ query: listProjects });
     setProjects(apiData.data.listProjects.items);
+  }
+
+  async function fetchUsers() {
+    const apiData = await API.graphql({ query: listUsers });
+    setUsers(apiData.data.listUsers.items);
   }
 
   async function createProject() {
@@ -60,6 +74,17 @@ function App() {
       setFormData(startForm);
       fetchProjects();
     }
+  }
+
+  async function createUser() {
+    if (!userData.userName) return;
+    await API.graphql({
+      query: createUserMutation,
+      variables: { input: userData },
+    });
+    setUsers([...users, userData]);
+    setUserData(startUserForm);
+    fetchUsers();
   }
 
   async function UpdateProject({ id }) {
@@ -97,8 +122,22 @@ function App() {
     fetchProjects();
   }
 
+  async function deleteUser({ id }) {
+    const newUsersArray = users.filter((user) => user.id !== id);
+    setUsers(newUsersArray);
+    await API.graphql({
+      query: deleteUserMutation,
+      variables: { input: { id } },
+    });
+    fetchUsers();
+  }
+
   function handleAddData(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleAddUser(e) {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   }
 
   return (
@@ -171,7 +210,13 @@ function App() {
             </Route>
 
             <Route exact path="/users">
-              <Users />
+              <Users
+                userData={userData}
+                createUser={createUser}
+                handleAddUser={handleAddUser}
+                users={users}
+                deleteUser={deleteUser}
+              />
             </Route>
           </Switch>
         </div>
