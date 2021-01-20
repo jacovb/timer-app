@@ -5,11 +5,19 @@ type Project @model {
   allowedHours: Int!
   usedHours: Int
   status: String!
-  users: [User] @connection(name: "ProjectUser")
+  users: [User] @connection
+  entries: [Entry] @connection
 }
 
 type User @model {
   id: ID!
   userName: String
-  project: Project @connection(name: "ProjectUser")
+}
+
+type Entry @model {
+  id: ID!
+  project: Project @connection
+  user: User @connection
+  description: String!
+  entryTime: Int!
 }
