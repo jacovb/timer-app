@@ -18,6 +18,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import EditIcon from "@material-ui/icons/Edit";
 
 import Navbar from "./components/Navbar";
+import Projects from "./components/Projects";
 import NewProjects from "./components/NewProjects";
 import Timesheets from "./components/Timesheets";
 import Reports from "./components/Reports";
@@ -191,6 +192,10 @@ function App() {
                   handleAddData={handleAddData}
                 />
               </div>
+            </Route>
+
+            <Route exact path="/projects">
+              <Projects />
             </Route>
 
             <Route exact path="/newProjects">
