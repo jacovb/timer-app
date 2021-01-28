@@ -6,9 +6,10 @@
     "autoVerifiedAttributes": [
         "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
-        "SMS Text Message"
+        "SMS Text Message",
+        "TOTP"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
@@ -21,7 +22,7 @@
         "email"
     ],
     "userpoolClientGenerateSecret": true,
-    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientRefreshTokenValidity": "365",
     "userpoolClientWriteAttributes": [
         "email"
     ],
@@ -45,8 +46,34 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
-    "userPoolGroupList": [],
+    "useDefault": "manual",
+    "userPoolGroupList": [
+        "Admin"
+    ],
     "serviceName": "Cognito",
-    "dependsOn": []
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "timerapp346f623fCustomMessage",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
+        }
+    ],
+    "hostedUI": true,
+    "hostedUIDomainName": "timerapp07ba0c35-07ba0c35",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "thirdPartyAuth": false,
+    "userPoolGroups": true,
+    "adminQueries": false,
+    "triggers": "{\n  \"CustomMessage\": [\n    \"verification-link\"\n  ]\n}",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost:3000/\"],\"LogoutURLs\":[\"https://localhost:4200/\"]}",
+    "verificationBucketName": "timerapp346f623fverificationbucket",
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": []
 }

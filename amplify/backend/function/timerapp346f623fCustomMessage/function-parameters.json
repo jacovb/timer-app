@@ -1,0 +1,25 @@
+{
+  "trigger": true,
+  "modules": [
+    "verification-link"
+  ],
+  "parentResource": "timerapp346f623f",
+  "functionName": "timerapp346f623fCustomMessage",
+  "resourceName": "timerapp346f623fCustomMessage",
+  "parentStack": "auth",
+  "triggerEnvs": [
+    {
+      "key": "RESOURCENAME",
+      "value": "resourceName"
+    }
+  ],
+  "triggerDir": "/usr/local/lib/node_modules/@aws-amplify/cli/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/CustomMessage",
+  "triggerTemplate": "CustomMessage.json.ejs",
+  "roleName": "timerapp346f623fCustomMessage",
+  "skipEdit": true,
+  "REDIRECTURL": "",
+  "EMAILSUBJECT": "",
+  "EMAILMESSAGE": "",
+  "RESOURCENAME": "resourceName",
+  "enableCors": false
+}

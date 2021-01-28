@@ -14,6 +14,13 @@
     "categories": {
       "auth": {
         "timerapp346f623f": {}
+      },
+      "function": {
+        "timerapp346f623fCustomMessage": {
+          "REDIRECTURL": "",
+          "EMAILSUBJECT": "",
+          "EMAILMESSAGE": ""
+        }
       }
     }
   }
